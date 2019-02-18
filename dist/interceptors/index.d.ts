@@ -1,1 +1,1 @@
-export * from './restful-query.interceptor';
+export * from "./restful-query.interceptor";

@@ -1,20 +1,20 @@
-import { mockValidatorDecorator } from '../utils';
-import { COMPARISON_OPERATORS, ComparisonOperator } from '../operators.list';
+import { COMPARISON_OPERATORS, ComparisonOperator } from "../operators.list";
+import { mockValidatorDecorator } from "../utils";
 
-const IsString = mockValidatorDecorator('IsString');
-const IsNotEmpty = mockValidatorDecorator('IsNotEmpty');
-const IsIn = mockValidatorDecorator('IsIn');
-const IsOptional = mockValidatorDecorator('IsOptional');
+const IsString = mockValidatorDecorator("IsString");
+const IsNotEmpty = mockValidatorDecorator("IsNotEmpty");
+const IsIn = mockValidatorDecorator("IsIn");
+const IsOptional = mockValidatorDecorator("IsOptional");
 
 export class FilterParamDto {
-  @IsNotEmpty()
-  @IsString()
-  field: string;
+    @IsNotEmpty()
+    @IsString()
+    public field: string;
 
-  @IsNotEmpty()
-  @IsIn(COMPARISON_OPERATORS)
-  operator: ComparisonOperator;
+    @IsNotEmpty()
+    @IsIn(COMPARISON_OPERATORS)
+    public operator: ComparisonOperator;
 
-  @IsOptional()
-  value?: any;
+    @IsOptional()
+    public value?: any;
 }

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const decorators_1 = require("./decorators");
 class CrudModule {
-    static forFeature(path, service, entity, dto) {
+    static forFeature(path, sservice, entity, dto) {
         let CrudGeneratedController = class CrudGeneratedController {
             constructor(service) {
                 this.service = service;
@@ -24,7 +24,7 @@ class CrudModule {
         CrudGeneratedController = __decorate([
             decorators_1.Crud(entity),
             common_1.Controller(path),
-            __param(0, common_1.Inject(service)),
+            __param(0, common_1.Inject(sservice)),
             __metadata("design:paramtypes", [Object])
         ], CrudGeneratedController);
         return CrudGeneratedController;

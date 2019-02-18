@@ -1,5 +1,5 @@
 {
-  "name": "@nestjsx/crud",
+  "name": "nestjsx-crudx",
   "version": "2.1.1",
   "description": "Nest CRUD for RESTful APIs",
   "scripts": {

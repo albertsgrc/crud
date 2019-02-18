@@ -1,6 +1,6 @@
-import { FilterParamDto } from './filter-param.dto';
-import { SortParamDto } from './sort-param.dto';
-import { JoinParamDto } from './join-param.dto';
+import { FilterParamDto } from "./filter-param.dto";
+import { JoinParamDto } from "./join-param.dto";
+import { SortParamDto } from "./sort-param.dto";
 export declare class RestfulParamsDto {
     fields?: string[];
     filter?: FilterParamDto[];

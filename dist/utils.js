@@ -5,29 +5,35 @@ let classTransformerPkg;
 let typeormPkg;
 let swaggerPkg;
 try {
-    classValidatorPkg = require('class-validator');
+    classValidatorPkg = require("class-validator");
 }
-catch (error) { }
+catch (error) {
+}
 try {
-    classTransformerPkg = require('class-transformer');
+    classTransformerPkg = require("class-transformer");
 }
-catch (error) { }
+catch (error) {
+}
 try {
-    typeormPkg = require('typeorm/decorator/entity/Entity');
+    typeormPkg = require("typeorm/decorator/entity/Entity");
 }
-catch (error) { }
+catch (error) {
+}
 try {
-    swaggerPkg = require('@nestjs/swagger/dist/constants');
+    swaggerPkg = require("@nestjs/swagger/dist/constants");
 }
-catch (error) { }
+catch (error) {
+}
 exports.swagger = swaggerPkg ? swaggerPkg : null;
 exports.hasValidator = !!classValidatorPkg;
 exports.hasTypeorm = !!typeormPkg;
 exports.isArrayFull = (obj) => Array.isArray(obj) && obj.length !== 0;
 exports.mockValidatorDecorator = (name) => classValidatorPkg && classValidatorPkg[name]
     ? classValidatorPkg[name]
-    : (...args) => (target, key) => { };
+    : (...args) => (target, key) => {
+    };
 exports.mockTransformerDecorator = (name) => classTransformerPkg && classTransformerPkg[name]
     ? classTransformerPkg[name]
-    : (...args) => (target, key) => { };
+    : (...args) => (target, key) => {
+    };
 //# sourceMappingURL=utils.js.map

@@ -1,6 +1,7 @@
 import { DeepPartial, Repository } from 'typeorm';
 import { RestfulService } from '../classes/restful-service.class';
 import { FilterParamParsed, RequestParamsParsed, RestfulOptions } from '../interfaces';
+import { Pagination } from '../interfaces/pagination.interface';
 export declare class RepositoryService<T> extends RestfulService<T> {
     protected repo: Repository<T>;
     protected options: RestfulOptions;
@@ -10,11 +11,11 @@ export declare class RepositoryService<T> extends RestfulService<T> {
     constructor(repo: Repository<T>);
     private readonly entityType;
     private readonly alias;
-    getMany(query?: RequestParamsParsed, options?: RestfulOptions): Promise<T[]>;
+    getMany(query?: RequestParamsParsed, options?: RestfulOptions): Promise<Pagination<T>>;
     getOne(id: number, { fields, join, cache }?: RequestParamsParsed, options?: RestfulOptions): Promise<T>;
     createOne(data: DeepPartial<T>, paramsFilter?: FilterParamParsed[]): Promise<T>;
     createMany(data: {
-        bulk: DeepPartial<T>[];
+        bulk: Array<DeepPartial<T>>;
     }, paramsFilter?: FilterParamParsed[]): Promise<T[]>;
     updateOne(id: number, data: DeepPartial<T>, paramsFilter?: FilterParamParsed[]): Promise<T>;
     deleteOne(id: number, paramsFilter?: FilterParamParsed[]): Promise<void>;

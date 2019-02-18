@@ -1,15 +1,15 @@
-import { mockValidatorDecorator } from '../utils';
+import { mockValidatorDecorator } from "../utils";
 
-const IsNotEmpty = mockValidatorDecorator('IsNotEmpty');
-const IsString = mockValidatorDecorator('IsString');
-const IsOptional = mockValidatorDecorator('IsOptional');
+const IsNotEmpty = mockValidatorDecorator("IsNotEmpty");
+const IsString = mockValidatorDecorator("IsString");
+const IsOptional = mockValidatorDecorator("IsOptional");
 
 export class JoinParamDto {
-  @IsNotEmpty()
-  @IsString()
-  field: string;
+    @IsNotEmpty()
+    @IsString()
+    public field: string;
 
-  @IsOptional()
-  @IsString({ each: true })
-  select?: string[];
+    @IsOptional()
+    @IsString({ each: true })
+    public select?: string[];
 }

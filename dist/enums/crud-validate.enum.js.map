@@ -1,1 +1,1 @@
-{"version":3,"file":"crud-validate.enum.js","sourceRoot":"","sources":["../../src/enums/crud-validate.enum.ts"],"names":[],"mappings":";;AAAA,IAAY,YAGX;AAHD,WAAY,YAAY;IACtB,sCAAsB,CAAA;IACtB,sCAAsB,CAAA;AACxB,CAAC,EAHW,YAAY,GAAZ,oBAAY,KAAZ,oBAAY,QAGvB"}
+{"version":3,"file":"crud-validate.enum.js","sourceRoot":"","sources":["../../src/enums/crud-validate.enum.ts"],"names":[],"mappings":";;AAAA,IAAY,YAGX;AAHD,WAAY,YAAY;IACpB,sCAAsB,CAAA;IACtB,sCAAsB,CAAA;AAC1B,CAAC,EAHW,YAAY,GAAZ,oBAAY,KAAZ,oBAAY,QAGvB"}

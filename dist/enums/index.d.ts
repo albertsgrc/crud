@@ -1,2 +1,2 @@
-export * from './crud-actions.enum';
-export * from './crud-validate.enum';
+export * from "./crud-actions.enum";
+export * from "./crud-validate.enum";

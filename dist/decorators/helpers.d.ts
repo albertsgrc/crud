@@ -1,11 +1,12 @@
-import { RequestMethod, ParseIntPipe, ValidationPipe } from '@nestjs/common';
-import { RouteParamtypes } from '@nestjs/common/enums/route-paramtypes.enum';
-import { CrudActions, CrudValidate } from '../enums';
-import { CrudOptions } from '../interfaces';
+import { ParseIntPipe, RequestMethod, ValidationPipe } from "@nestjs/common";
+import { RouteParamtypes } from "@nestjs/common/enums/route-paramtypes.enum";
+import { CrudActions, CrudValidate } from "../enums";
+import { CrudOptions } from "../interfaces";
 export declare function setRoute(path: string, method: RequestMethod, func: Function): void;
 export declare function setParamTypes(args: any[], prototype: any, name: string): void;
 export declare function setParams(metadata: any, target: object, name: string): void;
 export declare function setInterceptors(interceptors: any[], func: Function): void;
+export declare function setGuards(guards: any[], func: Function): void;
 export declare function setAction(action: CrudActions, func: Function): void;
 export declare function setSwaggerParams(func: Function, crudOptions: CrudOptions): void;
 export declare function setSwaggerQueryGetOne(func: Function, name: string): void;

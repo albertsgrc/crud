@@ -1,1 +1,1 @@
-export * from './repository-service.class';
+export * from "./repository-service.class";

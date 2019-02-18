@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 class RestfulService {
-    constructor() { }
+    constructor() {
+    }
     throwBadRequestException(msg) {
         throw new common_1.BadRequestException(msg);
     }

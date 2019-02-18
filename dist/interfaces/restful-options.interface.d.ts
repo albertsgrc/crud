@@ -1,5 +1,6 @@
-import { ComparisonOperator } from '../operators.list';
+import { ComparisonOperator } from "../operators.list";
 export interface RestfulOptions {
+    idType?: "string" | "number";
     allow?: string[];
     exclude?: string[];
     persist?: string[];
@@ -24,5 +25,5 @@ export interface JoinOptions {
 }
 export interface SortOptions {
     field: string;
-    order: 'ASC' | 'DESC';
+    order: "ASC" | "DESC";
 }

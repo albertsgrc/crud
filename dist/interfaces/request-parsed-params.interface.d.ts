@@ -1,4 +1,4 @@
-import { ComparisonOperator } from '../operators.list';
+import { ComparisonOperator } from "../operators.list";
 export interface RequestParamsParsed {
     fields?: string[];
     filter?: FilterParamParsed[];
@@ -21,5 +21,5 @@ export interface JoinParamParsed {
 }
 export interface SortParamParsed {
     field: string;
-    order: 'ASC' | 'DESC';
+    order: "ASC" | "DESC";
 }

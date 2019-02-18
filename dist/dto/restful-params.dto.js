@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
 const filter_param_dto_1 = require("./filter-param.dto");
-const sort_param_dto_1 = require("./sort-param.dto");
 const join_param_dto_1 = require("./join-param.dto");
-const IsOptional = utils_1.mockValidatorDecorator('IsOptional');
-const IsString = utils_1.mockValidatorDecorator('IsString');
-const IsNumber = utils_1.mockValidatorDecorator('IsNumber');
-const ValidateNested = utils_1.mockValidatorDecorator('ValidateNested');
-const Type = utils_1.mockTransformerDecorator('Type');
+const sort_param_dto_1 = require("./sort-param.dto");
+const IsOptional = utils_1.mockValidatorDecorator("IsOptional");
+const IsString = utils_1.mockValidatorDecorator("IsString");
+const IsNumber = utils_1.mockValidatorDecorator("IsNumber");
+const ValidateNested = utils_1.mockValidatorDecorator("ValidateNested");
+const Type = utils_1.mockTransformerDecorator("Type");
 class RestfulParamsDto {
 }
 __decorate([
@@ -28,25 +28,25 @@ __decorate([
 __decorate([
     IsOptional(),
     ValidateNested({ each: true }),
-    Type((t) => filter_param_dto_1.FilterParamDto),
+    Type(() => filter_param_dto_1.FilterParamDto),
     __metadata("design:type", Array)
 ], RestfulParamsDto.prototype, "filter", void 0);
 __decorate([
     IsOptional(),
     ValidateNested({ each: true }),
-    Type((t) => filter_param_dto_1.FilterParamDto),
+    Type(() => filter_param_dto_1.FilterParamDto),
     __metadata("design:type", Array)
 ], RestfulParamsDto.prototype, "or", void 0);
 __decorate([
     IsOptional(),
     ValidateNested({ each: true }),
-    Type((t) => join_param_dto_1.JoinParamDto),
+    Type(() => join_param_dto_1.JoinParamDto),
     __metadata("design:type", Array)
 ], RestfulParamsDto.prototype, "join", void 0);
 __decorate([
     IsOptional(),
     ValidateNested({ each: true }),
-    Type((t) => sort_param_dto_1.SortParamDto),
+    Type(() => sort_param_dto_1.SortParamDto),
     __metadata("design:type", Array)
 ], RestfulParamsDto.prototype, "sort", void 0);
 __decorate([

@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("../utils");
 const operators_list_1 = require("../operators.list");
-const IsNotEmpty = utils_1.mockValidatorDecorator('IsNotEmpty');
-const IsString = utils_1.mockValidatorDecorator('IsString');
-const IsIn = utils_1.mockValidatorDecorator('IsIn');
+const utils_1 = require("../utils");
+const IsNotEmpty = utils_1.mockValidatorDecorator("IsNotEmpty");
+const IsString = utils_1.mockValidatorDecorator("IsString");
+const IsIn = utils_1.mockValidatorDecorator("IsIn");
 class SortParamDto {
 }
 __decorate([

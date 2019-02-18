@@ -1,1 +1,1 @@
-export * from './restful-params.dto';
+export * from "./restful-params.dto";

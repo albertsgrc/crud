@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
-const IsNotEmpty = utils_1.mockValidatorDecorator('IsNotEmpty');
-const IsString = utils_1.mockValidatorDecorator('IsString');
-const IsOptional = utils_1.mockValidatorDecorator('IsOptional');
+const IsNotEmpty = utils_1.mockValidatorDecorator("IsNotEmpty");
+const IsString = utils_1.mockValidatorDecorator("IsString");
+const IsOptional = utils_1.mockValidatorDecorator("IsOptional");
 class JoinParamDto {
 }
 __decorate([

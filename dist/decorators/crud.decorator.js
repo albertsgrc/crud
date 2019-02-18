@@ -11,43 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const route_paramtypes_enum_1 = require("@nestjs/common/enums/route-paramtypes.enum");
+const constants_1 = require("../constants");
 const dto_1 = require("../dto");
 const enums_1 = require("../enums");
 const interceptors_1 = require("../interceptors");
-const constants_1 = require("../constants");
 const utils_1 = require("../utils");
 const helpers_1 = require("./helpers");
 exports.Crud = (dto, crudOptions = {}) => (target) => {
     const prototype = target.prototype;
     const baseRoutes = {
         getManyBase: {
-            name: 'getManyBase',
-            path: '/',
+            name: "getManyBase",
+            path: "/",
             method: common_1.RequestMethod.GET,
         },
         getOneBase: {
-            name: 'getOneBase',
-            path: '/:id',
+            name: "getOneBase",
+            path: "/:id",
             method: common_1.RequestMethod.GET,
         },
         createOneBase: {
-            name: 'createOneBase',
-            path: '/',
+            name: "createOneBase",
+            path: "/",
             method: common_1.RequestMethod.POST,
         },
         createManyBase: {
-            name: 'createManyBase',
-            path: '/bulk',
+            name: "createManyBase",
+            path: "/bulk",
             method: common_1.RequestMethod.POST,
         },
         updateOneBase: {
-            name: 'updateOneBase',
-            path: '/:id',
+            name: "updateOneBase",
+            path: "/:id",
             method: common_1.RequestMethod.PATCH,
         },
         deleteOneBase: {
-            name: 'deleteOneBase',
-            path: '/:id',
+            name: "deleteOneBase",
+            path: "/:id",
             method: common_1.RequestMethod.DELETE,
         },
     };
@@ -102,7 +102,8 @@ function getOneBaseInit(target, name, dto, crudOptions) {
         const mergedOptions = this.getMergedOptions(params);
         return this.service.getOne(id, query, mergedOptions);
     };
-    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, [helpers_1.setParseIntPipe()], 'id'), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.QUERY, 2)), target, name);
+    const pipes = crudOptions.options.idType === "string" ? [] : [helpers_1.setParseIntPipe()];
+    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, pipes, "id"), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.QUERY, 2)), target, name);
     helpers_1.setParamTypes([Number, Object, dto_1.RestfulParamsDto], prototype, name);
     helpers_1.setInterceptors([interceptors_1.RestfulQueryInterceptor], prototype[name]);
     helpers_1.setAction(enums_1.CrudActions.ReadOne, prototype[name]);
@@ -119,6 +120,16 @@ function createOneBaseInit(target, name, dto, crudOptions) {
         helpers_1.setValidationPipe(crudOptions, enums_1.CrudValidate.CREATE),
     ])), target, name);
     helpers_1.setParamTypes([Object, dto], prototype, name);
+    if (crudOptions.interceptors &&
+        crudOptions.interceptors.create &&
+        crudOptions.interceptors.create.length) {
+        helpers_1.setInterceptors(crudOptions.interceptors.create, prototype[name]);
+    }
+    if (crudOptions.guards &&
+        crudOptions.guards.create &&
+        crudOptions.guards.create.length) {
+        helpers_1.setGuards(crudOptions.guards.create, prototype[name]);
+    }
     helpers_1.setAction(enums_1.CrudActions.CreateOne, prototype[name]);
     helpers_1.setSwaggerParams(prototype[name], crudOptions);
 }
@@ -128,22 +139,32 @@ function createManyBaseInit(target, name, dto, crudOptions) {
         const paramsFilter = this.getParamsFilter(params);
         return this.service.createMany(body, paramsFilter);
     };
-    const isArray = utils_1.mockValidatorDecorator('isArray');
-    const ValidateNested = utils_1.mockValidatorDecorator('ValidateNested');
-    const IsNotEmpty = utils_1.mockValidatorDecorator('IsNotEmpty');
-    const Type = utils_1.mockTransformerDecorator('Type');
+    const isArray = utils_1.mockValidatorDecorator("isArray");
+    const ValidateNested = utils_1.mockValidatorDecorator("ValidateNested");
+    const IsNotEmpty = utils_1.mockValidatorDecorator("IsNotEmpty");
+    const Type = utils_1.mockTransformerDecorator("Type");
     class BulkDto {
     }
     __decorate([
         isArray({ each: true, groups: [enums_1.CrudValidate.CREATE] }),
         IsNotEmpty({ groups: [enums_1.CrudValidate.CREATE] }),
         ValidateNested({ each: true, groups: [enums_1.CrudValidate.CREATE] }),
-        Type((t) => dto),
+        Type(() => dto),
         __metadata("design:type", Array)
     ], BulkDto.prototype, "bulk", void 0);
     helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.BODY, 1, [
         helpers_1.setValidationPipe(crudOptions, enums_1.CrudValidate.CREATE),
     ])), target, name);
+    if (crudOptions.interceptors &&
+        crudOptions.interceptors.create &&
+        crudOptions.interceptors.create.length) {
+        helpers_1.setInterceptors(crudOptions.interceptors.create, prototype[name]);
+    }
+    if (crudOptions.guards &&
+        crudOptions.guards.create &&
+        crudOptions.guards.create.length) {
+        helpers_1.setGuards(crudOptions.guards.create, prototype[name]);
+    }
     helpers_1.setParamTypes([Object, utils_1.hasValidator ? BulkDto : {}], prototype, name);
     helpers_1.setAction(enums_1.CrudActions.CreateMany, prototype[name]);
     helpers_1.setSwaggerParams(prototype[name], crudOptions);
@@ -154,7 +175,8 @@ function updateOneBaseInit(target, name, dto, crudOptions) {
         const paramsFilter = this.getParamsFilter(params);
         return this.service.updateOne(id, body, paramsFilter);
     };
-    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, [helpers_1.setParseIntPipe()], 'id'), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.BODY, 2, [
+    const pipes = crudOptions.options.idType === "string" ? [] : [helpers_1.setParseIntPipe()];
+    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, pipes, "id"), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.BODY, 2, [
         helpers_1.setValidationPipe(crudOptions, enums_1.CrudValidate.UPDATE),
     ])), target, name);
     helpers_1.setParamTypes([Number, Object, dto], prototype, name);
@@ -167,13 +189,14 @@ function deleteOneBaseInit(target, name, crudOptions) {
         const paramsFilter = this.getParamsFilter(params);
         return this.service.deleteOne(id, paramsFilter);
     };
-    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, [helpers_1.setParseIntPipe()], 'id'), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1)), target, name);
+    const pipes = crudOptions.options.idType === "string" ? [] : [helpers_1.setParseIntPipe()];
+    helpers_1.setParams(Object.assign({}, helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 0, pipes, "id"), helpers_1.createParamMetadata(route_paramtypes_enum_1.RouteParamtypes.PARAM, 1)), target, name);
     helpers_1.setParamTypes([Number, Object], prototype, name);
     helpers_1.setAction(enums_1.CrudActions.DeleteOne, prototype[name]);
     helpers_1.setSwaggerParams(prototype[name], crudOptions);
 }
 function getParamsFilterInit(prototype, crudOptions) {
-    prototype['getParamsFilter'] = function getParamsFilter(params) {
+    prototype.getParamsFilter = function getParamsFilter(params) {
         if (!crudOptions.params || !params) {
             return [];
         }
@@ -182,13 +205,13 @@ function getParamsFilterInit(prototype, crudOptions) {
             .filter((field) => !!params[field])
             .map((field) => ({
             field: isArray ? field : crudOptions.params[field],
-            operator: 'eq',
+            operator: "eq",
             value: params[field],
         }));
     };
 }
 function getMergedOptionsInit(prototype, crudOptions) {
-    prototype['getMergedOptions'] = function getMergedOptions(params) {
+    prototype.getMergedOptions = function getMergedOptions(params) {
         const paramsFilter = this.getParamsFilter(params);
         const options = Object.assign({}, crudOptions.options || {});
         const optionsFilter = options.filter || [];

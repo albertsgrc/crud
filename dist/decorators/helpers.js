@@ -21,6 +21,10 @@ function setInterceptors(interceptors, func) {
     Reflect.defineMetadata(constants_1.INTERCEPTORS_METADATA, interceptors, func);
 }
 exports.setInterceptors = setInterceptors;
+function setGuards(guards, func) {
+    Reflect.defineMetadata(constants_1.GUARDS_METADATA, guards, func);
+}
+exports.setGuards = setGuards;
 function setAction(action, func) {
     Reflect.defineMetadata(constants_2.ACTION_NAME_METADATA, action, func);
 }
@@ -34,7 +38,7 @@ function setSwaggerParams(func, crudOptions) {
             const params = list.map((name) => ({
                 name,
                 required: true,
-                in: 'path',
+                in: "path",
                 type: Number,
             }));
             setSwagger(params, func);
@@ -46,24 +50,24 @@ function setSwaggerQueryGetOne(func, name) {
     if (utils_1.swagger) {
         const params = [
             {
-                name: 'fields',
+                name: "fields",
                 description: `${name} fields`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'join',
+                name: "join",
                 description: `Join relational entity with ${name}`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'cache',
+                name: "cache",
                 description: `Reset cached result`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: Number,
             },
         ];
@@ -75,66 +79,66 @@ function setSwaggerQueryGetMany(func, name) {
     if (utils_1.swagger) {
         const params = [
             {
-                name: 'fields',
+                name: "fields",
                 description: `${name} fields in the collection`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'filter',
+                name: "filter",
                 description: `Filter ${name} collection with condition`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'or',
+                name: "or",
                 description: `Filter ${name} collection with condition (OR)`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'sort',
+                name: "sort",
                 description: `Sort ${name} collection by field and order`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'join',
+                name: "join",
                 description: `Join relational entity with ${name}`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: String,
             },
             {
-                name: 'limit',
+                name: "limit",
                 description: `Limit ${name} collection`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: Number,
             },
             {
-                name: 'offset',
+                name: "offset",
                 description: `Offset ${name} collection`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: Number,
             },
             {
-                name: 'page',
+                name: "page",
                 description: `Set page of ${name} collection`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: Number,
             },
             {
-                name: 'cache',
+                name: "cache",
                 description: `Reset cached result`,
                 required: false,
-                in: 'query',
+                in: "query",
                 type: Number,
             },
         ];
@@ -142,7 +146,7 @@ function setSwaggerQueryGetMany(func, name) {
     }
 }
 exports.setSwaggerQueryGetMany = setSwaggerQueryGetMany;
-function createParamMetadata(paramtype, index, pipes = [], data = undefined) {
+function createParamMetadata(paramtype, index, pipes = [], data) {
     return {
         [`${paramtype}:${index}`]: {
             index,
@@ -167,7 +171,7 @@ exports.getAction = getAction;
 function setValidationPipe(crudOptions, group) {
     const options = crudOptions.validation || {};
     return utils_1.hasValidator
-        ? new common_1.ValidationPipe(Object.assign({}, options, { groups: [group], transform: false }))
+        ? new common_1.ValidationPipe(Object.assign({}, options, { groups: [group] }))
         : undefined;
 }
 exports.setValidationPipe = setValidationPipe;
