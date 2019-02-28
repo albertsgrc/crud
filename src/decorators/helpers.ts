@@ -188,7 +188,7 @@ export function getAction(func: Function): CrudActions {
 }
 
 export function setValidationPipe(crudOptions: CrudOptions, group: CrudValidate) {
-  const options = crudOptions.validation || {};
+  const options = JSON.parse(JSON.stringify(crudOptions.validation || {}));
 
   options.transformOptions = options.transformOptions || {};
 

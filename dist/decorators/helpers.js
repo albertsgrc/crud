@@ -169,7 +169,7 @@ function getAction(func) {
 }
 exports.getAction = getAction;
 function setValidationPipe(crudOptions, group) {
-    const options = crudOptions.validation || {};
+    const options = JSON.parse(JSON.stringify(crudOptions.validation || {}));
     options.transformOptions = options.transformOptions || {};
     options.transformOptions.groups = [group];
     return utils_1.hasValidator
