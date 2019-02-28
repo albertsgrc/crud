@@ -38,7 +38,7 @@ function setSwaggerParams(func, crudOptions) {
             const params = list.map((name) => ({
                 name,
                 required: true,
-                in: "path",
+                in: 'path',
                 type: Number,
             }));
             setSwagger(params, func);
@@ -50,24 +50,24 @@ function setSwaggerQueryGetOne(func, name) {
     if (utils_1.swagger) {
         const params = [
             {
-                name: "fields",
+                name: 'fields',
                 description: `${name} fields`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "join",
+                name: 'join',
                 description: `Join relational entity with ${name}`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "cache",
+                name: 'cache',
                 description: `Reset cached result`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: Number,
             },
         ];
@@ -79,66 +79,66 @@ function setSwaggerQueryGetMany(func, name) {
     if (utils_1.swagger) {
         const params = [
             {
-                name: "fields",
+                name: 'fields',
                 description: `${name} fields in the collection`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "filter",
+                name: 'filter',
                 description: `Filter ${name} collection with condition`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "or",
+                name: 'or',
                 description: `Filter ${name} collection with condition (OR)`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "sort",
+                name: 'sort',
                 description: `Sort ${name} collection by field and order`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "join",
+                name: 'join',
                 description: `Join relational entity with ${name}`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: String,
             },
             {
-                name: "limit",
+                name: 'limit',
                 description: `Limit ${name} collection`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: Number,
             },
             {
-                name: "offset",
+                name: 'offset',
                 description: `Offset ${name} collection`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: Number,
             },
             {
-                name: "page",
+                name: 'page',
                 description: `Set page of ${name} collection`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: Number,
             },
             {
-                name: "cache",
+                name: 'cache',
                 description: `Reset cached result`,
                 required: false,
-                in: "query",
+                in: 'query',
                 type: Number,
             },
         ];
@@ -170,6 +170,8 @@ function getAction(func) {
 exports.getAction = getAction;
 function setValidationPipe(crudOptions, group) {
     const options = crudOptions.validation || {};
+    options.transformOptions = options.transformOptions || {};
+    options.transformOptions.groups = [group];
     return utils_1.hasValidator
         ? new common_1.ValidationPipe(Object.assign({}, options, { groups: [group] }))
         : undefined;
