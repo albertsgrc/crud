@@ -1,6 +1,6 @@
 {
   "name": "nestjsx-crudx",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Nest CRUD for RESTful APIs",
   "scripts": {
     "docker:up": "docker-compose up -d",
