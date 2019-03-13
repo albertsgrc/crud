@@ -54,7 +54,6 @@ class RepositoryService extends restful_service_class_1.RestfulService {
                 this.throwBadRequestException(`Empty data. Nothing to save.`);
             }
             const { generatedMaps } = yield this.repo.insert(entity);
-            console.log({ generatedMaps });
             return Object.assign(entity, generatedMaps[0]);
         });
     }
