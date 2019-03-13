@@ -88,8 +88,6 @@ export class RepositoryService<T> extends RestfulService<T> {
 
     const { generatedMaps } = await this.repo.insert(entity);
 
-    console.log({ generatedMaps });
-
     return Object.assign(entity, generatedMaps[0]);
   }
 
